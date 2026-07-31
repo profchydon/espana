@@ -1,0 +1,28 @@
+/* Card baseline for preview/ files. Each card is a self-contained
+   ~700px-wide tile. Skip titles/framing — the asset name renders outside. */
+@import url("../colors_and_type.css");
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.card {
+  width: 700px;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  background: var(--bg-surface);
+  font-family: var(--font-body);
+  color: var(--fg-primary);
+}
+.row { display: flex; align-items: center; gap: 8px; }
+.stack { display: flex; flex-direction: column; }
+.label {
+  font: var(--text-caption);
+  color: var(--black-300);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

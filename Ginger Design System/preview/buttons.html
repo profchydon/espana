@@ -1,0 +1,21 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Buttons" subtitle="Primary · outline · ghost in 3 sizes" viewport="700x280" --><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.card{padding:24px;background:#fff;display:flex;flex-direction:column;gap:14px}
+.label{font:500 10px var(--font-mono);color:var(--black-300);text-transform:uppercase;letter-spacing:.06em}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{font:600 14px var(--font-body);letter-spacing:-.004em;border-radius:8px;padding:10px 20px;border:1.5px solid transparent;cursor:pointer;transition:all 160ms cubic-bezier(.2,.8,.2,1)}
+.btn-lg{padding:14px 28px;font-size:16px}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn-primary{background:var(--ginger-500);color:#fff}
+.btn-primary:hover{background:var(--ginger-600)}
+.btn-outline{background:transparent;color:var(--ginger-600);border-color:var(--ginger-500)}
+.btn-outline:hover{background:rgba(229,74,36,.08)}
+.btn-ghost{background:transparent;color:var(--black-700);border-color:transparent}
+.btn-ghost:hover{background:var(--black-50)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+</style></head>
+<body><div class="card">
+<div><div class="label">Primary</div><div class="row" style="margin-top:6px"><button class="btn btn-primary btn-lg">Continue</button><button class="btn btn-primary">Continue</button><button class="btn btn-primary btn-sm">Continue</button><button class="btn btn-primary" disabled>Continue</button></div></div>
+<div><div class="label">Outline</div><div class="row" style="margin-top:6px"><button class="btn btn-outline btn-lg">Continue</button><button class="btn btn-outline">Continue</button><button class="btn btn-outline btn-sm">Continue</button></div></div>
+<div><div class="label">Ghost</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost btn-lg">Continue →</button><button class="btn btn-ghost">Continue →</button><button class="btn btn-ghost btn-sm">Continue →</button></div></div>
+</div></body></html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<!-- @dsCard group="Components" name="Badges" subtitle="Status pills" viewport="700x120" --><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.card{padding:24px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.badge{font:600 11px var(--font-body);letter-spacing:-.004em;padding:4px 10px;border-radius:9999px;display:inline-flex;align-items:center;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%}
+.b-neutral{background:var(--black-50);color:var(--black-700)}
+.b-brand{background:var(--ginger-50);color:var(--ginger-700)}
+.b-warn{background:var(--sunshine-100);color:var(--sunshine-800)}
+.b-success{background:var(--green-50);color:var(--green-700)}
+.b-danger{background:var(--red-50);color:var(--red-700)}
+.b-iris{background:var(--iris-50);color:var(--iris-700)}
+.label{font:500 10px var(--font-mono);color:var(--black-300);text-transform:uppercase;letter-spacing:.06em}
+</style></head>
+<body><div class="card">
+<div><div class="label">Pill badges</div><div class="row" style="margin-top:8px">
+  <span class="badge b-neutral">Draft</span>
+  <span class="badge b-brand"><span class="dot" style="background:var(--ginger-500)"></span>Live</span>
+  <span class="badge b-success"><span class="dot" style="background:var(--green-500)"></span>Active</span>
+  <span class="badge b-warn">Pending</span>
+  <span class="badge b-danger"><span class="dot" style="background:var(--red-500)"></span>Failed</span>
+  <span class="badge b-iris">Beta</span>
+</div></div>
+</div></body></html>

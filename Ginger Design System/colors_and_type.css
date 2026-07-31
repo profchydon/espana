@@ -1,0 +1,220 @@
+/* ==========================================================================
+   GINGER DESIGN SYSTEM — colors_and_type.css
+   Drop this file into any page to inherit the full Ginger token system.
+   ========================================================================== */
+
+/* ----- Webfonts ---------------------------------------------------------- */
+/* Graphik is licensed via Commercial Type. Until .woff2 files are added to
+   fonts/graphik/, we fall back to Inter (closest geometric grotesque). */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap");
+
+/* When Graphik becomes available, uncomment:
+@font-face {
+  font-family: "Graphik";
+  src: url("./fonts/graphik/Graphik-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Graphik";
+  src: url("./fonts/graphik/Graphik-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+*/
+
+:root {
+  /* ===== COLOR — Sunshine ============================================== */
+  --sunshine-50:  #FFF8EC;
+  --sunshine-100: #FDEDC9;
+  --sunshine-200: #FCDFA0;
+  --sunshine-300: #F9CE73;
+  --sunshine-400: #F6BC4A;
+  --sunshine-500: #F0A91F;
+  --sunshine-600: #D08F11;
+  --sunshine-700: #8E5F0A;
+  --sunshine-800: #5A3C05;
+  --sunshine-900: #2E1F02;
+  --sunshine-950: #1A1100;
+
+  /* ===== COLOR — Ginger Sunshine Red (signature) ======================== */
+  --ginger-50:  #FCE7E1;
+  --ginger-100: #F8CFC4;
+  --ginger-200: #F4A893;
+  --ginger-300: #EE8267;
+  --ginger-400: #EA6541;
+  --ginger-500: #E54A24;
+  --ginger-600: #C9381A;
+  --ginger-700: #8C2812;
+  --ginger-800: #5A1A0C;
+  --ginger-900: #2F0E07;
+  --ginger-950: #1A0703;
+
+  /* ===== COLOR — Purple Iris =========================================== */
+  --iris-50:  #ECE4F2;
+  --iris-100: #DBCBE6;
+  --iris-200: #C2A8D6;
+  --iris-300: #A684C5;
+  --iris-400: #8C5FB6;
+  --iris-500: #6E3FA0;
+  --iris-600: #4F2A7B;
+  --iris-700: #3A1F5C;
+  --iris-800: #281540;
+  --iris-900: #160A24;
+  --iris-950: #0C0518;
+
+  /* ===== COLOR — Cardinal ============================================== */
+  --cardinal-50:  #FCE3E6;
+  --cardinal-100: #F8C5CC;
+  --cardinal-200: #EFA1AB;
+  --cardinal-300: #E37985;
+  --cardinal-400: #D9505F;
+  --cardinal-500: #CE2A3D;
+  --cardinal-600: #A41C2D;
+  --cardinal-700: #6F121F;
+  --cardinal-800: #480B14;
+  --cardinal-900: #25060A;
+  --cardinal-950: #150305;
+
+  /* ===== COLOR — Green ================================================= */
+  --green-50:  #E5FBE0;
+  --green-100: #C6F4BB;
+  --green-200: #98EA88;
+  --green-300: #5EE048;
+  --green-400: #34CF1F;
+  --green-500: #22A912;
+  --green-600: #18810D;
+  --green-700: #115F09;
+  --green-800: #0A3F06;
+  --green-900: #052303;
+  --green-950: #021301;
+
+  /* ===== COLOR — Red (semantic alerts) ================================= */
+  --red-50:  #FCE3E3;
+  --red-100: #F8C2C2;
+  --red-200: #F29494;
+  --red-300: #EC6868;
+  --red-400: #E73C3C;
+  --red-500: #DC1F1F;
+  --red-600: #B01010;
+  --red-700: #7E0909;
+  --red-800: #520606;
+  --red-900: #2A0303;
+  --red-950: #170101;
+
+  /* ===== COLOR — Black (neutrals) ====================================== */
+  --black-50:  #F2F2F2;
+  --black-100: #D9D9D9;
+  --black-200: #B0B0B0;
+  --black-300: #7A7A7A;
+  --black-400: #525252;
+  --black-500: #262626;
+  --black-600: #1F1F1F;
+  --black-700: #181818;
+  --black-800: #121212;
+  --black-900: #0A0A0A;
+  --black-950: #050505;
+
+  /* ===== SEMANTIC COLOR ================================================ */
+  --fg-primary:    var(--black-900);
+  --fg-secondary:  var(--black-400);
+  --fg-tertiary:   var(--black-300);
+  --fg-on-brand:   #FFFFFF;
+  --fg-link:       var(--ginger-600);
+
+  --bg-page:       #FAFAFA;            /* off-white */
+  --bg-surface:    #FFFFFF;
+  --bg-muted:      var(--black-50);
+  --bg-inverse:    var(--black-900);
+
+  --border-subtle:  var(--black-100);
+  --border-default: var(--black-200);
+  --border-strong:  var(--black-400);
+
+  --brand-primary:        var(--ginger-500);
+  --brand-primary-hover:  var(--ginger-600);
+  --brand-primary-press:  var(--ginger-700);
+  --brand-accent:         var(--iris-500);
+  --brand-warm:           var(--sunshine-500);
+
+  --status-success: var(--green-500);
+  --status-warning: var(--sunshine-500);
+  --status-danger:  var(--red-500);
+
+  /* ===== TYPOGRAPHY — families ========================================= */
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-sans:    "Inter", "Graphik", "Helvetica Neue", system-ui, sans-serif;
+  --font-body:    "Poppins", "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ===== TYPOGRAPHY — scale (size / line-height / tracking) ============ */
+  --text-display1: 700 48px/52.4px var(--font-sans);
+  --text-display2: 700 40px/52px   var(--font-sans);
+  --text-h1:       700 44px/57.2px var(--font-sans);
+  --text-h2:       700 36px/46.8px var(--font-sans);
+  --text-h3:       700 28px/36.4px var(--font-sans);
+  --text-h4:       700 24px/31.2px var(--font-sans);
+  --text-h5:       700 20px/26px   var(--font-sans);
+  --text-body:     500 16px/27.2px var(--font-body);
+  --text-body2:    500 14px/23.8px var(--font-body);
+  --text-caption:  500 13px/22.1px var(--font-body);
+  --text-footnote: 400 10px/17px   var(--font-body);
+
+  --tracking-heading: -0.01em;  /* −1% on display + heading */
+  --tracking-body:    -0.004em; /* −0.4% on body and below */
+
+  /* ===== SPACING (8pt base) ============================================ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ===== RADII ========================================================= */
+  --radius-sm:    4px;
+  --radius-md:    8px;   /* buttons, inputs */
+  --radius-lg:    12px;  /* cards */
+  --radius-xl:    16px;  /* modals */
+  --radius-pill:  9999px;
+
+  /* ===== SHADOWS ======================================================= */
+  --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04), 0 1px 1px rgba(20, 20, 20, 0.03);
+  --shadow-md: 0 8px 24px rgba(20, 20, 20, 0.08), 0 2px 6px rgba(20, 20, 20, 0.04);
+  --shadow-lg: 0 24px 48px rgba(20, 20, 20, 0.12), 0 6px 12px rgba(20, 20, 20, 0.06);
+
+  /* ===== MOTION ======================================================== */
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-quick:  160ms;
+  --duration-normal: 240ms;
+  --duration-slow:   360ms;
+}
+
+/* ===== Semantic type classes ============================================ */
+.display-1  { font: var(--text-display1); letter-spacing: var(--tracking-heading); }
+.display-2  { font: var(--text-display2); letter-spacing: var(--tracking-heading); }
+.h1, h1     { font: var(--text-h1);       letter-spacing: var(--tracking-heading); }
+.h2, h2     { font: var(--text-h2);       letter-spacing: var(--tracking-heading); }
+.h3, h3     { font: var(--text-h3);       letter-spacing: var(--tracking-heading); }
+.h4, h4     { font: var(--text-h4);       letter-spacing: var(--tracking-heading); }
+.h5, h5     { font: var(--text-h5);       letter-spacing: var(--tracking-heading); }
+.body, p    { font: var(--text-body);     letter-spacing: var(--tracking-body); }
+.body-2     { font: var(--text-body2);    letter-spacing: var(--tracking-body); }
+.caption    { font: var(--text-caption);  letter-spacing: var(--tracking-body); }
+.footnote   { font: var(--text-footnote); letter-spacing: var(--tracking-body); }
+.editorial  { font-family: var(--font-display); font-weight: 800; letter-spacing: var(--tracking-heading); }
+
+/* ===== Page baseline ==================================================== */
+html, body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--fg-primary);
+  font: var(--text-body);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- @dsCard group="Colors" name="Sunshine" subtitle="Warm hero · 11 steps" viewport="700x120" --><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.card{padding:18px 24px}
+.scale{display:grid;grid-template-columns:repeat(11,1fr);gap:6px;margin-top:6px}
+.swatch{aspect-ratio:1;border-radius:8px;display:flex;align-items:flex-end;justify-content:flex-start;padding:4px 5px;box-sizing:border-box}
+.swatch span{font:500 9px/1 var(--font-body);color:#000;mix-blend-mode:difference;color:#fff;opacity:.7}
+.row-label{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.name{font:700 14px var(--font-sans);letter-spacing:-.01em;color:var(--black-700)}
+.hex{font:500 11px var(--font-mono);color:var(--black-300)}
+</style></head>
+<body><div class="card">
+  <div class="row-label"><span class="name">Sunshine</span><span class="hex">Warm hero · amber → brown</span></div>
+  <div class="scale" id="row"></div>
+</div>
+<script>
+const steps = ['50','100','200','300','400','500','600','700','800','900','950'];
+const root = getComputedStyle(document.documentElement);
+const row = document.getElementById('row');
+steps.forEach(s=>{const c=root.getPropertyValue(`--sunshine-${s}`).trim();const el=document.createElement('div');el.className='swatch';el.style.background=c;el.innerHTML=`<span>${s}</span>`;row.appendChild(el);});
+</script></body></html>
