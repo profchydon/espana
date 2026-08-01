@@ -1,7 +1,10 @@
 import Database from "better-sqlite3";
+import path from "path";
 import { env } from "@/lib/env";
 
-const DB_PATH = env.databasePath;
+const DB_PATH = path.isAbsolute(env.databasePath)
+  ? env.databasePath
+  : path.join(process.cwd(), env.databasePath);
 
 let db: Database.Database | undefined;
 

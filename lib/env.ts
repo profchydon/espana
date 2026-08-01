@@ -1,5 +1,3 @@
-import path from "path";
-
 function readString(key: string, defaultValue: string): string {
   const value = process.env[key];
   return value && value.trim() !== "" ? value.trim() : defaultValue;
@@ -26,7 +24,7 @@ export const env = {
   nodeEnv,
   isProduction: nodeEnv === "production",
   authSecret: readString("AUTH_SECRET", "dev-secret-change-in-production"),
-  databasePath: readString("DATABASE_PATH", path.join(process.cwd(), "espanafonica.db")),
+  databasePath: readString("DATABASE_PATH", "espanafonica.db"),
   sessionMaxAgeDays: readNumber("SESSION_MAX_AGE_DAYS", 7),
   sessionCookieSecure: readBoolean("SESSION_COOKIE_SECURE", nodeEnv === "production"),
   appUrl: readString("APP_URL", "http://localhost:3000"),
