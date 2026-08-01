@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+espanafonica.db
+espanafonica.db-wal
+espanafonica.db-shm
 
 # debug
 npm-debug.log*
