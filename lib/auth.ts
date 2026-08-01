@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { getDb } from "@/lib/db";
+import { createDefaultSettings } from "@/lib/settings";
 
 export type User = {
   id: number;
@@ -85,6 +86,8 @@ export async function createUser(input: {
   if (!user) {
     throw new Error("Failed to create user.");
   }
+
+  createDefaultSettings(user.id, user.companyName);
 
   return user;
 }

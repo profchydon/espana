@@ -1,11 +1,11 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { env } from "@/lib/env";
 
 export const SESSION_COOKIE = "espanafonica_session";
 
-const secret = new TextEncoder().encode(
-  process.env.AUTH_SECRET ?? "dev-secret-change-in-production"
-);
+const secret = new TextEncoder().encode(env.authSecret);
+const sessionMaxAgeSeconds = env.sessionMaxAgeDays * 60 * 60 * 24;
 
 export type SessionPayload = {
   userId: number;
@@ -15,16 +15,16 @@ export async function createSession(userId: number) {
   const token = await new SignJWT({ userId })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime(`${env.sessionMaxAgeDays}d`)
     .sign(secret);
 
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: env.sessionCookieSecure,
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: sessionMaxAgeSeconds,
   });
 }
 
