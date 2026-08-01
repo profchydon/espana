@@ -3,11 +3,11 @@ import { Plus, Filter, Download, Search, MoreHorizontal } from "lucide-react";
 
 export default function InvoicesPage() {
   const invoices = [
-    { id: "INV-2045", client: "Beta Ltd.", date: "Jul 5, 2026", due: "Jul 19, 2026", amount: "₦850,000", status: "Draft" },
-    { id: "INV-2044", client: "Acme Corp.", date: "Jul 2, 2026", due: "Jul 16, 2026", amount: "₦1,200,000", status: "Sent" },
-    { id: "INV-2043", client: "TechFlow NG", date: "Jun 28, 2026", due: "Jul 12, 2026", amount: "₦450,000", status: "Paid" },
-    { id: "INV-2042", client: "Oasis Hospitals", date: "Jun 25, 2026", due: "Jul 9, 2026", amount: "₦3,100,000", status: "Overdue" },
-    { id: "INV-2041", client: "Peak Retail", date: "Jun 20, 2026", due: "Jul 4, 2026", amount: "₦420,000", status: "Paid" },
+    { id: "INV-2045", client: "Beta Ltd.", date: "Jul 5, 2026", due: "Jul 19, 2026", amount: "€850,000", status: "Draft" },
+    { id: "INV-2044", client: "Acme Corp.", date: "Jul 2, 2026", due: "Jul 16, 2026", amount: "€1,200,000", status: "Sent" },
+    { id: "INV-2043", client: "TechFlow NG", date: "Jun 28, 2026", due: "Jul 12, 2026", amount: "€450,000", status: "Paid" },
+    { id: "INV-2042", client: "Oasis Hospitals", date: "Jun 25, 2026", due: "Jul 9, 2026", amount: "€3,100,000", status: "Overdue" },
+    { id: "INV-2041", client: "Peak Retail", date: "Jun 20, 2026", due: "Jul 4, 2026", amount: "€420,000", status: "Paid" },
   ];
 
   const getStatusBadge = (status: string) => {

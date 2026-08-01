@@ -128,10 +128,10 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-2 gap-4 p-6 sm:grid-cols-4">
             {[
-              ["Cash balance", "₦13,213,380"],
-              ["Revenue (90d)", "₦6,721,180"],
-              ["Expenses (90d)", "₦2,385,200"],
-              ["Receivables", "₦2,161,880"],
+              ["Cash balance", "€13,213,380"],
+              ["Revenue (90d)", "€6,721,180"],
+              ["Expenses (90d)", "€2,385,200"],
+              ["Receivables", "€2,161,880"],
             ].map(([label, value]) => (
               <div key={label}>
                 <div className="text-[11.5px] font-semibold" style={{ color: "var(--black-300)" }}>

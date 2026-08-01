@@ -3,18 +3,18 @@ import { ArrowUpRight, ArrowDownRight, MoreHorizontal, Plus } from "lucide-react
 
 export default function DashboardOverview() {
   const metrics = [
-    { label: "Cash balance", value: "₦14,213,380", trend: "+4.2%", positive: true },
-    { label: "Receivables", value: "₦2,161,880", trend: "-1.1%", positive: false },
-    { label: "Payables", value: "₦1,185,200", trend: "+12.4%", positive: false },
-    { label: "Net profit (MTD)", value: "₦4,821,100", trend: "+8.9%", positive: true },
+    { label: "Cash balance", value: "€14,213,380", trend: "+4.2%", positive: true },
+    { label: "Receivables", value: "€2,161,880", trend: "-1.1%", positive: false },
+    { label: "Payables", value: "€1,185,200", trend: "+12.4%", positive: false },
+    { label: "Net profit (MTD)", value: "€4,821,100", trend: "+8.9%", positive: true },
   ];
 
   const transactions = [
-    { id: "TRX-001", date: "Jul 4, 2026", desc: "Invoice #INV-2041 payment", amount: "+₦420,000", status: "Cleared" },
-    { id: "TRX-002", date: "Jul 3, 2026", desc: "AWS Subscription", amount: "-₦45,000", status: "Cleared" },
-    { id: "TRX-003", date: "Jul 3, 2026", desc: "Office Supplies", amount: "-₦12,500", status: "Pending" },
-    { id: "TRX-004", date: "Jul 2, 2026", desc: "Invoice #INV-2040 payment", amount: "+₦1,150,000", status: "Cleared" },
-    { id: "TRX-005", date: "Jul 1, 2026", desc: "Payroll Run - June", amount: "-₦3,400,000", status: "Cleared" },
+    { id: "TRX-001", date: "Jul 4, 2026", desc: "Invoice #INV-2041 payment", amount: "+€420,000", status: "Cleared" },
+    { id: "TRX-002", date: "Jul 3, 2026", desc: "AWS Subscription", amount: "-€45,000", status: "Cleared" },
+    { id: "TRX-003", date: "Jul 3, 2026", desc: "Office Supplies", amount: "-€12,500", status: "Pending" },
+    { id: "TRX-004", date: "Jul 2, 2026", desc: "Invoice #INV-2040 payment", amount: "+€1,150,000", status: "Cleared" },
+    { id: "TRX-005", date: "Jul 1, 2026", desc: "Payroll Run - June", amount: "-€3,400,000", status: "Cleared" },
   ];
 
   return (
@@ -68,7 +68,7 @@ export default function DashboardOverview() {
             {[30, 45, 60, 40, 80, 55, 75, 45, 90, 65, 100, 85].map((h, i) => (
               <div key={i} className="group relative flex flex-1 flex-col justify-end gap-1 h-[200px]">
                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-[var(--black-900)] text-white text-[11px] py-1 px-2 rounded whitespace-nowrap pointer-events-none transition-opacity z-10">
-                  ₦{(h * 15000).toLocaleString()}
+                  €{(h * 15000).toLocaleString()}
                 </div>
                 <div 
                   className="w-full rounded-t-sm transition-all duration-300 hover:opacity-80"

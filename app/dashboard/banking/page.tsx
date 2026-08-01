@@ -6,7 +6,7 @@ export default function BankingPage() {
       id: "BF-101", 
       date: "Jul 5, 2026", 
       desc: "PAYSTACK *ACME CORP", 
-      amount: "₦1,200,000", 
+      amount: "€1,200,000", 
       type: "in",
       match: { type: "exact", confidence: 98, target: "Invoice #INV-2044" }
     },
@@ -14,7 +14,7 @@ export default function BankingPage() {
       id: "BF-102", 
       date: "Jul 4, 2026", 
       desc: "AWS EMEA", 
-      amount: "₦45,000", 
+      amount: "€45,000", 
       type: "out",
       match: { type: "rule", confidence: 95, target: "Software Subscriptions" }
     },
@@ -22,7 +22,7 @@ export default function BankingPage() {
       id: "BF-103", 
       date: "Jul 3, 2026", 
       desc: "TRANSFER TO WEMA BANK", 
-      amount: "₦500,000", 
+      amount: "€500,000", 
       type: "out",
       match: null
     },
@@ -30,7 +30,7 @@ export default function BankingPage() {
       id: "BF-104", 
       date: "Jul 3, 2026", 
       desc: "NIP/POS/SUPERMART", 
-      amount: "₦12,500", 
+      amount: "€12,500", 
       type: "out",
       match: { type: "suggested", confidence: 60, target: "Office Supplies" }
     },
@@ -62,7 +62,7 @@ export default function BankingPage() {
         </div>
         <div className="text-right">
           <div className="text-[13px] text-[var(--black-400)] font-medium">Statement balance</div>
-          <div className="tnum font-bold text-[20px]">₦14,213,380</div>
+          <div className="tnum font-bold text-[20px]">€14,213,380</div>
         </div>
       </div>
 
