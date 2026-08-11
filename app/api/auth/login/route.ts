@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getUserByEmail, verifyPassword } from "@/lib/auth";
-import { createSession } from "@/lib/session";
+import { attachSessionCookie } from "@/lib/session";
 
 export async function POST(request: Request) {
   try {
@@ -22,9 +22,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
     }
 
-    await createSession(user.id);
-
-    return NextResponse.json({
+    const response = NextResponse.json({
       user: {
         id: user.id,
         email: user.email,
@@ -33,6 +31,8 @@ export async function POST(request: Request) {
         companyName: user.companyName,
       },
     });
+
+    return attachSessionCookie(response, user.id);
   } catch {
     return NextResponse.json({ error: "Something went wrong. Try again." }, { status: 500 });
   }

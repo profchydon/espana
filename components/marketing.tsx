@@ -23,11 +23,8 @@ export function MarketingNav() {
           </Link>
         </nav>
         <div className="flex items-center gap-3">
-          <Link href="/login" className="btn btn-ghost btn-sm hidden sm:inline-flex">
+          <Link href="/login" className="btn btn-primary btn-sm">
             Log in
-          </Link>
-          <Link href="/register" className="btn btn-primary btn-sm">
-            Get started
           </Link>
         </div>
       </div>

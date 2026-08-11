@@ -1,4 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
+import type { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { env } from "@/lib/env";
 
@@ -11,21 +12,32 @@ export type SessionPayload = {
   userId: string;
 };
 
-export async function createSession(userId: string) {
-  const token = await new SignJWT({ userId })
+export const sessionCookieOptions = {
+  httpOnly: true,
+  secure: env.sessionCookieSecure,
+  sameSite: "lax" as const,
+  path: "/",
+  maxAge: sessionMaxAgeSeconds,
+};
+
+export async function createSessionToken(userId: string) {
+  return new SignJWT({ userId })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(`${env.sessionMaxAgeDays}d`)
     .sign(secret);
+}
 
+export async function attachSessionCookie(response: NextResponse, userId: string) {
+  const token = await createSessionToken(userId);
+  response.cookies.set(SESSION_COOKIE, token, sessionCookieOptions);
+  return response;
+}
+
+export async function createSession(userId: string) {
   const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE, token, {
-    httpOnly: true,
-    secure: env.sessionCookieSecure,
-    sameSite: "lax",
-    path: "/",
-    maxAge: sessionMaxAgeSeconds,
-  });
+  const token = await createSessionToken(userId);
+  cookieStore.set(SESSION_COOKIE, token, sessionCookieOptions);
 }
 
 export async function getSession(): Promise<SessionPayload | null> {
@@ -46,6 +58,11 @@ export async function getSession(): Promise<SessionPayload | null> {
 export async function destroySession() {
   const cookieStore = await cookies();
   cookieStore.delete(SESSION_COOKIE);
+}
+
+export function clearSessionCookie(response: NextResponse) {
+  response.cookies.delete(SESSION_COOKIE);
+  return response;
 }
 
 export async function verifySessionToken(token: string): Promise<SessionPayload | null> {

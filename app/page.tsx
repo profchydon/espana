@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  ArrowRight,
   Banknote,
   CheckCircle2,
   Landmark,
@@ -84,10 +83,7 @@ export default function LandingPage() {
               reconciliation, and a live dashboard. All in euros.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/register" className="btn btn-primary btn-lg">
-                Start free
-              </Link>
-              <Link href="/login" className="btn btn-outline btn-lg">
+              <Link href="/login" className="btn btn-primary btn-lg">
                 Log in
               </Link>
             </div>
@@ -206,8 +202,8 @@ export default function LandingPage() {
           <h2 className="editorial max-w-[520px] text-[34px] leading-tight text-white">
             Close this month before lunch.
           </h2>
-          <Link href="/register" className="btn btn-lg" style={{ background: "#fff", color: "var(--ginger-700)" }}>
-            Get started <ArrowRight size={16} />
+          <Link href="/login" className="btn btn-lg" style={{ background: "#fff", color: "var(--ginger-700)" }}>
+            Log in
           </Link>
         </div>
       </section>
