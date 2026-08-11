@@ -1,12 +1,12 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: acct-postgres
+    container_name: espana-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: acct
+      POSTGRES_DB: espana
     ports:
       - "5434:5432"
     volumes:
@@ -19,7 +19,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: acct-redis
+    container_name: espana-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -35,10 +35,10 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.db-setup
-    container_name: acct-db-setup
+    container_name: espana-db-setup
     restart: "no"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/acct
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/espana
     depends_on:
       postgres:
         condition: service_healthy
@@ -47,14 +47,14 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    container_name: acct-app
+    container_name: espana-app
     restart: unless-stopped
     env_file:
       - ../.env
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/acct
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/espana
       REDIS_URL: redis://redis:6379
       AUTH_TRUST_HOST: "true"
     depends_on:
