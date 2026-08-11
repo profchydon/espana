@@ -23,9 +23,14 @@ const nodeEnv = readString("NODE_ENV", "development");
 export const env = {
   nodeEnv,
   isProduction: nodeEnv === "production",
+  databaseUrl: readString(
+    "DATABASE_URL",
+    "postgresql://postgres:postgres@localhost:5434/acct"
+  ),
+  redisUrl: readString("REDIS_URL", "redis://localhost:6379"),
   authSecret: readString("AUTH_SECRET", "dev-secret-change-in-production"),
-  databasePath: readString("DATABASE_PATH", "espanafonica.db"),
   sessionMaxAgeDays: readNumber("SESSION_MAX_AGE_DAYS", 7),
   sessionCookieSecure: readBoolean("SESSION_COOKIE_SECURE", nodeEnv === "production"),
   appUrl: readString("APP_URL", "http://localhost:3000"),
+  authTrustHost: readBoolean("AUTH_TRUST_HOST", true),
 };

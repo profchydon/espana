@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (getUserByEmail(email)) {
+    if (await getUserByEmail(email)) {
       return NextResponse.json(
         { error: "An account with this email already exists." },
         { status: 409 }

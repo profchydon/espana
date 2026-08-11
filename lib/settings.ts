@@ -1,7 +1,7 @@
-import { getDb } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 export type UserSettings = {
-  userId: number;
+  userId: string;
   legalBusinessName: string;
   registrationNumber: string;
   taxId: string;
@@ -19,113 +19,82 @@ export const DEFAULT_SETTINGS = {
   financialYearEnd: "12-31" as const,
 };
 
-type SettingsRow = {
-  user_id: number;
-  legal_business_name: string;
-  registration_number: string;
-  tax_id: string;
-  business_address: string;
-  base_currency: string;
-  financial_year_end: string;
-  updated_at: string;
-};
-
-function mapSettings(row: SettingsRow): UserSettings {
+function mapSettings(settings: {
+  userId: string;
+  legalBusinessName: string;
+  registrationNumber: string;
+  taxId: string;
+  businessAddress: string;
+  baseCurrency: string;
+  financialYearEnd: string;
+  updatedAt: Date;
+}): UserSettings {
   return {
-    userId: row.user_id,
-    legalBusinessName: row.legal_business_name,
-    registrationNumber: row.registration_number,
-    taxId: row.tax_id,
-    businessAddress: row.business_address,
-    baseCurrency: row.base_currency as UserSettings["baseCurrency"],
-    financialYearEnd: row.financial_year_end as UserSettings["financialYearEnd"],
-    updatedAt: row.updated_at,
+    userId: settings.userId,
+    legalBusinessName: settings.legalBusinessName,
+    registrationNumber: settings.registrationNumber,
+    taxId: settings.taxId,
+    businessAddress: settings.businessAddress,
+    baseCurrency: settings.baseCurrency as UserSettings["baseCurrency"],
+    financialYearEnd: settings.financialYearEnd as UserSettings["financialYearEnd"],
+    updatedAt: settings.updatedAt.toISOString(),
   };
 }
 
-export function createDefaultSettings(userId: number, companyName: string) {
-  getDb()
-    .prepare(
-      `INSERT OR IGNORE INTO user_settings (
-        user_id, legal_business_name, registration_number, tax_id,
-        business_address, base_currency, financial_year_end
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)`
-    )
-    .run(
+export async function createDefaultSettings(userId: string, companyName: string) {
+  await prisma.userSettings.upsert({
+    where: { userId },
+    update: {},
+    create: {
       userId,
-      companyName,
-      DEFAULT_SETTINGS.registrationNumber,
-      DEFAULT_SETTINGS.taxId,
-      DEFAULT_SETTINGS.businessAddress,
-      DEFAULT_SETTINGS.baseCurrency,
-      DEFAULT_SETTINGS.financialYearEnd
-    );
+      legalBusinessName: companyName,
+      ...DEFAULT_SETTINGS,
+    },
+  });
 }
 
-export function getSettings(userId: number, companyName?: string): UserSettings {
-  const row = getDb()
-    .prepare(`SELECT * FROM user_settings WHERE user_id = ?`)
-    .get(userId) as SettingsRow | undefined;
+export async function getSettings(userId: string, companyName?: string): Promise<UserSettings> {
+  let settings = await prisma.userSettings.findUnique({ where: { userId } });
 
-  if (!row) {
-    createDefaultSettings(userId, companyName ?? "My Business");
-    return getSettings(userId);
+  if (!settings) {
+    await createDefaultSettings(userId, companyName ?? "My Business");
+    settings = await prisma.userSettings.findUnique({ where: { userId } });
   }
 
-  return mapSettings(row);
+  if (!settings) {
+    throw new Error("Failed to load user settings.");
+  }
+
+  return mapSettings(settings);
 }
 
-export function updateSettings(
-  userId: number,
+export async function updateSettings(
+  userId: string,
   input: Omit<UserSettings, "userId" | "updatedAt">
 ) {
-  getDb()
-    .prepare(
-      `UPDATE user_settings SET
-        legal_business_name = ?,
-        registration_number = ?,
-        tax_id = ?,
-        business_address = ?,
-        base_currency = ?,
-        financial_year_end = ?,
-        updated_at = datetime('now')
-      WHERE user_id = ?`
-    )
-    .run(
-      input.legalBusinessName.trim(),
-      input.registrationNumber.trim(),
-      input.taxId.trim(),
-      input.businessAddress.trim(),
-      input.baseCurrency,
-      input.financialYearEnd,
-      userId
-    );
+  const settings = await prisma.userSettings.update({
+    where: { userId },
+    data: {
+      legalBusinessName: input.legalBusinessName.trim(),
+      registrationNumber: input.registrationNumber.trim(),
+      taxId: input.taxId.trim(),
+      businessAddress: input.businessAddress.trim(),
+      baseCurrency: input.baseCurrency,
+      financialYearEnd: input.financialYearEnd,
+    },
+  });
 
-  return getSettings(userId);
+  return mapSettings(settings);
 }
 
-export function resetSettings(userId: number, companyName: string) {
-  getDb()
-    .prepare(
-      `UPDATE user_settings SET
-        legal_business_name = ?,
-        registration_number = ?,
-        tax_id = ?,
-        business_address = ?,
-        base_currency = ?,
-        financial_year_end = ?,
-        updated_at = datetime('now')
-      WHERE user_id = ?`
-    )
-    .run(
-      companyName,
-      DEFAULT_SETTINGS.registrationNumber,
-      DEFAULT_SETTINGS.taxId,
-      DEFAULT_SETTINGS.businessAddress,
-      DEFAULT_SETTINGS.baseCurrency,
-      DEFAULT_SETTINGS.financialYearEnd,
-      userId
-    );
+export async function resetSettings(userId: string, companyName: string) {
+  const settings = await prisma.userSettings.update({
+    where: { userId },
+    data: {
+      legalBusinessName: companyName,
+      ...DEFAULT_SETTINGS,
+    },
+  });
 
-  return getSettings(userId);
+  return mapSettings(settings);
 }

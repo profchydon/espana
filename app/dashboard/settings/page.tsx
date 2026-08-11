@@ -10,12 +10,12 @@ export default async function SettingsPage() {
     redirect("/login");
   }
 
-  const user = getUserById(session.userId);
+  const user = await getUserById(session.userId);
   if (!user) {
     redirect("/login");
   }
 
-  const settings = getSettings(user.id, user.companyName);
+  const settings = await getSettings(user.id, user.companyName);
 
   return (
     <div className="max-w-[800px]">

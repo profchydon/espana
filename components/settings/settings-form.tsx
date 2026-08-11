@@ -83,14 +83,12 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit} key={settings.updatedAt}>
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="page-header">
         <div>
-          <h1 className="text-[28px] font-bold tracking-tight text-[var(--black-900)]">Settings</h1>
-          <p className="text-[14px] text-[var(--black-400)] mt-1">
-            Manage your business profile and preferences.
-          </p>
+          <h1 className="page-title">Settings</h1>
+          <p className="page-desc">Business profile and financial preferences.</p>
         </div>
-        <div className="flex gap-3">
+        <div className="page-actions">
           <button
             type="button"
             className="btn btn-outline"
@@ -119,8 +117,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
         </p>
       ) : null}
 
-      <div className="card flex flex-col gap-6">
-        <h2 className="text-[18px] font-bold border-b border-[var(--black-50)] pb-4">
+      <div className="panel">
+        <div className="panel-body flex flex-col gap-6">
+        <h2 className="text-[16px] font-bold border-b border-[var(--black-100)] pb-4">
           Business details
         </h2>
 
@@ -185,7 +184,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
         </div>
 
-        <h2 className="text-[18px] font-bold border-b border-[var(--black-50)] pb-4 mt-4">
+        <h2 className="text-[16px] font-bold border-b border-[var(--black-100)] pb-4 mt-2">
           Financial preferences
         </h2>
 
@@ -224,6 +223,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               <option value="09-30">September 30</option>
             </select>
           </div>
+        </div>
         </div>
       </div>
     </form>

@@ -42,7 +42,8 @@ export function LoginForm() {
   }
 
   return (
-    <form className="card flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="panel" onSubmit={handleSubmit}>
+      <div className="panel-body flex flex-col gap-5">
       {error ? (
         <p className="rounded-md border border-[var(--red-200)] bg-[var(--red-50)] px-3 py-2 text-[13px] text-[var(--red-700)]">
           {error}
@@ -86,9 +87,10 @@ export function LoginForm() {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary mt-2 w-full justify-center" disabled={loading}>
+      <button type="submit" className="btn btn-primary mt-1 w-full justify-center" disabled={loading}>
         {loading ? "Logging in..." : "Log in"}
       </button>
+      </div>
     </form>
   );
 }

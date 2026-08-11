@@ -13,7 +13,7 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
-  const user = getUserById(session.userId);
+  const user = await getUserById(session.userId);
   if (!user) {
     redirect("/login");
   }
@@ -22,9 +22,9 @@ export default async function DashboardLayout({
     <div className="flex h-screen overflow-hidden bg-[var(--bg-page)] text-[var(--fg-primary)]">
       <Sidebar user={user} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <TopHeader user={user} />
-        <main className="flex-1 overflow-y-auto scroll-thin p-8">
-          <div className="mx-auto max-w-[1120px]">{children}</div>
+        <TopHeader />
+        <main className="flex-1 overflow-y-auto scroll-thin p-6 lg:p-8">
+          <div className="mx-auto max-w-[1200px]">{children}</div>
         </main>
       </div>
     </div>

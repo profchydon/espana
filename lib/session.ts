@@ -8,10 +8,10 @@ const secret = new TextEncoder().encode(env.authSecret);
 const sessionMaxAgeSeconds = env.sessionMaxAgeDays * 60 * 60 * 24;
 
 export type SessionPayload = {
-  userId: number;
+  userId: string;
 };
 
-export async function createSession(userId: number) {
+export async function createSession(userId: string) {
   const token = await new SignJWT({ userId })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -36,7 +36,7 @@ export async function getSession(): Promise<SessionPayload | null> {
   try {
     const { payload } = await jwtVerify(token, secret);
     const userId = payload.userId;
-    if (typeof userId !== "number") return null;
+    if (typeof userId !== "string") return null;
     return { userId };
   } catch {
     return null;
@@ -52,7 +52,7 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
   try {
     const { payload } = await jwtVerify(token, secret);
     const userId = payload.userId;
-    if (typeof userId !== "number") return null;
+    if (typeof userId !== "string") return null;
     return { userId };
   } catch {
     return null;

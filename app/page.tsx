@@ -2,78 +2,65 @@ import Link from "next/link";
 import {
   ArrowRight,
   Banknote,
-  BarChart3,
-  Boxes,
-  Building2,
-  FileText,
+  CheckCircle2,
   Landmark,
   ReceiptText,
   ShieldCheck,
-  Stethoscope,
-  Scale,
-  Store,
-  Truck,
+  Wallet,
 } from "lucide-react";
 import { MarketingFooter, MarketingNav } from "@/components/marketing";
+import { formatEuroPlain } from "@/lib/format";
+import { dashboardMetrics } from "@/lib/mvp-data";
 
 const features = [
   {
     icon: ReceiptText,
-    title: "Intelligent Invoicing",
-    body: "Create, send, and track invoices across borders with automated multi-currency support.",
-  },
-  {
-    icon: Landmark,
-    title: "Global Bank Reconciliation",
-    body: "Connect your global accounts and let our AI engine match transactions instantaneously.",
+    title: "Invoicing",
+    body: "Create and send invoices in euros. Track draft, sent, paid, and overdue in one list.",
+    featured: true,
   },
   {
     icon: Banknote,
-    title: "Ledger Automation",
-    body: "Double-entry accounting runs in the background. Every action posts directly to the general ledger.",
+    title: "Expenses",
+    body: "Log bills and receipts, route approvals, and keep spending tied to the ledger.",
+    featured: false,
   },
   {
-    icon: Boxes,
-    title: "Expense Management",
-    body: "Capture receipts, categorize spending, and route approvals without leaving the platform.",
+    icon: Landmark,
+    title: "Bank reconciliation",
+    body: "Import bank feeds and match lines to invoices and expenses automatically.",
+    featured: false,
   },
   {
-    icon: Building2,
-    title: "Asset Depreciation",
-    body: "Log fixed assets and automatically compute depreciation schedules in real time.",
-  },
-  {
-    icon: BarChart3,
-    title: "Real-time Reporting",
-    body: "Generate P&L, balance sheets, and cash flow statements with a single click.",
+    icon: Wallet,
+    title: "Live overview",
+    body: "Cash, receivables, payables, and profit — updated as you work, not at month-end.",
+    featured: false,
   },
 ];
 
-const industries = [
-  { icon: FileText, name: "Fintech Startups", copy: "API-first ledgers with webhook support" },
-  { icon: Store, name: "E-commerce", copy: "High-volume transaction reconciliation" },
-  { icon: BarChart3, name: "SaaS Platforms", copy: "Subscription and deferred revenue tracking" },
-  { icon: Scale, name: "Agencies", copy: "Multi-currency invoicing and billable hours" },
-  { icon: Truck, name: "Logistics", copy: "Fleet assets and per-route cost tracking" },
-  { icon: Stethoscope, name: "Healthcare", copy: "Supplies, billing and asset registers" },
+const workflow = [
+  { step: "01", title: "Send an invoice", copy: "Create in euros, send to your client, and track status from draft to paid." },
+  { step: "02", title: "Record expenses", copy: "Capture vendor bills and team spend. Approve what hits the books." },
+  { step: "03", title: "Reconcile the bank", copy: "Match statement lines to ledger entries. Close the month with confidence." },
 ];
 
 const faqs = [
   {
-    q: "Do I need an accountant to use Espanafonica?",
-    a: "No. The ledger work happens behind simple actions — send an invoice, approve a bill, match a bank line. Your accountant can join with their own login when you need them.",
+    q: "Do I need an accountant to start?",
+    a: "No. Espanafonica handles the ledger behind simple actions. Invite your accountant when you need them.",
   },
   {
-    q: "Can I migrate from another tool?",
-    a: "Yes. Import your chart of accounts, contacts, open invoices and bank statements from CSV or Excel, and you can run both systems in parallel while you settle in.",
+    q: "What currency does it use?",
+    a: "Euros by default. All amounts, invoices, and reports display in €.",
   },
   {
-    q: "Is my data safe?",
-    a: "Your books are encrypted in transit and at rest, with role-based access and a full audit log of every change.",
+    q: "Can I migrate existing data?",
+    a: "Import contacts, open invoices, and bank statements from CSV. Run both systems in parallel while you settle in.",
   },
   {
-    q: "How does pricing work?",
-    a: "One flat annual plan with every module included. No per-seat surprises — see the pricing page for details.",
+    q: "Is my data secure?",
+    a: "Encrypted in transit and at rest, with role-based access and a full audit trail.",
   },
 ];
 
@@ -82,201 +69,146 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col">
       <MarketingNav />
 
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-[1200px] px-6 pb-20 pt-20 text-center">
-        <span
-          className="badge b-neutral"
-          style={{ border: "1px solid var(--black-100)", background: "#fff" }}
-        >
-          <ShieldCheck size={13} color="var(--green-600)" />
-          Audit-ready books, every day of the year
-        </span>
-        <h1
-          className="editorial mx-auto mt-6 max-w-[720px] text-[44px] leading-[1.12] sm:text-[56px]"
-        >
-          Accounting that runs itself.
-        </h1>
-        <p className="mx-auto mt-5 max-w-[560px] text-[16px] leading-relaxed" style={{ color: "var(--black-400)" }}>
-          Espanafonica automates your bookkeeping — invoicing, bank reconciliation,
-          inventory and live financial statements — so you spend hours on your
-          business, not your books.
-        </p>
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <Link href="/register" className="btn btn-primary btn-lg">
-            Get started
-          </Link>
-          <Link href="/request-demo" className="btn btn-outline btn-lg">
-            Schedule a demo
-          </Link>
-        </div>
-
-        {/* Product glimpse */}
-        <div
-          className="card mx-auto mt-14 max-w-[880px] overflow-hidden text-left"
-          style={{ padding: 0 }}
-        >
-          <div
-            className="flex items-center gap-2 px-5 py-3"
-            style={{ borderBottom: "1px solid var(--black-100)", background: "var(--black-50)" }}
-          >
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--black-100)" }} />
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--black-100)" }} />
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--black-100)" }} />
-            <span className="ml-3 text-[12px]" style={{ color: "var(--black-300)" }}>
-              app.espanafonica.com — dashboard
+      <section className="mx-auto w-full max-w-[1160px] px-6 pb-20 pt-16">
+        <div className="landing-hero-grid">
+          <div>
+            <span className="badge b-brand">
+              <ShieldCheck size={13} />
+              MVP ledger for European teams
             </span>
+            <h1 className="editorial mt-6 text-[42px] leading-[1.1] sm:text-[52px]">
+              Your books, without the busywork.
+            </h1>
+            <p className="mt-5 max-w-[480px] text-[16px] leading-relaxed text-[var(--black-400)]">
+              Espanafonica is a focused accounting ledger — invoices, expenses, bank
+              reconciliation, and a live dashboard. All in euros.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/register" className="btn btn-primary btn-lg">
+                Start free
+              </Link>
+              <Link href="/login" className="btn btn-outline btn-lg">
+                Log in
+              </Link>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-6 text-[13px] font-semibold text-[var(--black-400)]">
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-[var(--green-600)]" /> No setup fee
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-[var(--green-600)]" /> EUR by default
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-[var(--green-600)]" /> Audit-ready ledger
+              </span>
+            </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 p-6 sm:grid-cols-4">
-            {[
-              ["Cash balance", "€13,213,380"],
-              ["Revenue (90d)", "€6,721,180"],
-              ["Expenses (90d)", "€2,385,200"],
-              ["Receivables", "€2,161,880"],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <div className="text-[11.5px] font-semibold" style={{ color: "var(--black-300)" }}>
-                  {label}
+
+          <div className="panel panel-flush overflow-hidden">
+            <div className="flex items-center gap-2 border-b border-[var(--black-100)] bg-[var(--black-50)] px-4 py-2.5">
+              <span className="h-2 w-2 rounded-full bg-[var(--black-200)]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--black-200)]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--black-200)]" />
+              <span className="ml-2 text-[11px] text-[var(--black-400)]">Dashboard preview</span>
+            </div>
+            <div className="stat-strip">
+              {[
+                ["Cash", dashboardMetrics.cashBalance],
+                ["Receivables", dashboardMetrics.receivables],
+                ["Payables", dashboardMetrics.payables],
+                ["Profit MTD", dashboardMetrics.netProfitMtd],
+              ].map(([label, value]) => (
+                <div key={label as string} className="stat-strip-item">
+                  <div className="stat-strip-label">{label as string}</div>
+                  <div className="stat-strip-value tnum">{formatEuroPlain(value as number)}</div>
                 </div>
-                <div
-                  className="tnum mt-1 text-[19px] font-bold"
-                >
-                  {value}
-                </div>
+              ))}
+            </div>
+            <div className="p-5">
+              <div className="mb-3 text-[12px] font-bold text-[var(--black-400)]">Cash flow</div>
+              <div className="flex items-end gap-1.5" style={{ height: 100 }}>
+                {[42, 58, 36, 72, 48, 84, 62, 90, 68, 96, 74, 100].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-t"
+                    style={{
+                      height: `${h}%`,
+                      background: i % 2 ? "var(--black-100)" : "var(--ginger-500)",
+                    }}
+                  />
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-          <div className="flex items-end gap-1.5 px-6 pb-6" aria-hidden>
-            {[38, 52, 30, 66, 48, 74, 58, 82, 64, 90, 72, 96].map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 rounded-t"
-                style={{
-                  height: h,
-                  background: i % 2 ? "var(--black-100)" : "var(--ginger-400)",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        <p className="mt-10 text-[12px] font-semibold uppercase tracking-wide" style={{ color: "var(--black-300)" }}>
-          Trusted by teams at
-        </p>
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-          {["GlobalPay", "Acme", "NovaTech", "BetaLtd", "FinCorp", "Accrue"].map((brand) => (
-            <span
-              key={brand}
-              className="text-[15px] font-bold tracking-tight"
-              style={{ color: "var(--black-300)" }}
-            >
-              {brand}
-            </span>
-          ))}
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="w-full" style={{ background: "#fff", borderTop: "1px solid var(--black-100)" }}>
-        <div className="mx-auto w-full max-w-[1200px] px-6 py-20">
+      <section id="features" className="border-t border-[var(--black-100)] bg-white">
+        <div className="mx-auto w-full max-w-[1160px] px-6 py-20">
           <div className="max-w-[520px]">
-            <div className="eyebrow">Everything in one ledger</div>
-            <h2 className="mt-2 text-[32px] leading-tight">
-              All your accounting needs, one calm place
-            </h2>
-            <p className="mt-3 text-[14.5px]" style={{ color: "var(--black-400)" }}>
-              Not a spreadsheet in the cloud. Every module below posts to a single
-              double-entry ledger, so your reports are always current.
+            <div className="eyebrow">MVP modules</div>
+            <h2 className="mt-2 text-[32px] leading-tight">Everything you need to run the books</h2>
+            <p className="mt-3 text-[14px] text-[var(--black-400)]">
+              Four core workflows. One ledger. No feature bloat — just what matters for day-to-day accounting.
             </p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="feature-bento mt-10">
             {features.map((f) => (
-              <div key={f.title} className="card card-hover">
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-[10px]"
-                  style={{ background: "var(--ginger-50)" }}
-                >
+              <div
+                key={f.title}
+                className={`card card-hover ${f.featured ? "feature-bento-featured" : ""}`}
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-[var(--ginger-50)]">
                   <f.icon size={20} color="var(--ginger-600)" strokeWidth={1.7} />
                 </div>
-                <h3 className="mt-4 text-[16.5px]">{f.title}</h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed" style={{ color: "var(--black-400)" }}>
-                  {f.body}
-                </p>
+                <h3 className="mt-4 text-[16px] font-bold">{f.title}</h3>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--black-400)]">{f.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Industries */}
-      <section id="industries" className="mx-auto w-full max-w-[1200px] px-6 py-20">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <div className="eyebrow">Built for your industry</div>
-            <h2 className="mt-2 text-[32px] leading-tight">Works the way your business works</h2>
-          </div>
-          <Link href="/request-demo" className="btn btn-ghost">
-            Talk to sales <ArrowRight size={16} />
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {industries.map((ind) => (
-            <div key={ind.name} className="card card-hover flex items-start gap-4" style={{ padding: 20 }}>
-              <div
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px]"
-                style={{ background: "var(--sunshine-100)" }}
-              >
-                <ind.icon size={18} color="var(--sunshine-700)" strokeWidth={1.7} />
-              </div>
-              <div>
-                <div className="text-[15px] font-bold">
-                  {ind.name}
-                </div>
-                <div className="mt-0.5 text-[12.5px]" style={{ color: "var(--black-400)" }}>
-                  {ind.copy}
-                </div>
+      <section id="workflow" className="mx-auto w-full max-w-[1160px] px-6 py-20">
+        <div className="eyebrow">How it works</div>
+        <h2 className="mt-2 text-[32px] leading-tight">Three steps to closed books</h2>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {workflow.map((item) => (
+            <div key={item.step} className="panel">
+              <div className="panel-body">
+                <div className="text-[32px] font-bold leading-none text-[var(--ginger-200)]">{item.step}</div>
+                <h3 className="mt-4 text-[16px] font-bold">{item.title}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-[var(--black-400)]">{item.copy}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="w-full" style={{ background: "#fff", borderTop: "1px solid var(--black-100)" }}>
-        <div className="mx-auto w-full max-w-[820px] px-6 py-20">
-          <h2 className="text-center text-[32px]">Questions, answered</h2>
+      <section id="faq" className="border-t border-[var(--black-100)] bg-white">
+        <div className="mx-auto w-full max-w-[760px] px-6 py-20">
+          <h2 className="text-center text-[32px]">Questions</h2>
           <div className="mt-8 flex flex-col gap-3">
             {faqs.map((f) => (
-              <details key={f.q} className="card group" style={{ padding: 0 }}>
-                <summary className="cursor-pointer list-none px-6 py-4 text-[15px] font-semibold">
+              <details key={f.q} className="panel group">
+                <summary className="cursor-pointer list-none px-5 py-4 text-[15px] font-semibold">
                   {f.q}
                 </summary>
-                <p className="px-6 pb-5 text-[13.5px] leading-relaxed" style={{ color: "var(--black-400)" }}>
-                  {f.a}
-                </p>
+                <p className="px-5 pb-5 text-[13px] leading-relaxed text-[var(--black-400)]">{f.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA band */}
-      <section style={{ background: "var(--ginger-600)" }}>
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-6 py-16 text-center">
-          <h2 className="editorial max-w-[560px] text-[34px] leading-tight text-white">
-            Close this month&apos;s books before lunch.
+      <section className="bg-[var(--ginger-600)]">
+        <div className="mx-auto flex w-full max-w-[1160px] flex-col items-center gap-6 px-6 py-16 text-center">
+          <h2 className="editorial max-w-[520px] text-[34px] leading-tight text-white">
+            Close this month before lunch.
           </h2>
-          <div className="flex gap-3">
-            <Link href="/register" className="btn btn-lg" style={{ background: "#fff", color: "var(--ginger-700)" }}>
-              Get started
-            </Link>
-            <Link
-              href="/request-demo"
-              className="btn btn-lg"
-              style={{ border: "1.5px solid rgba(255,255,255,0.6)", color: "#fff" }}
-            >
-              Schedule a demo
-            </Link>
-          </div>
+          <Link href="/register" className="btn btn-lg" style={{ background: "#fff", color: "var(--ginger-700)" }}>
+            Get started <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
 

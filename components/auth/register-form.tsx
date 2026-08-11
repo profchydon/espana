@@ -46,7 +46,8 @@ export function RegisterForm() {
   }
 
   return (
-    <form className="card flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="panel" onSubmit={handleSubmit}>
+      <div className="panel-body flex flex-col gap-5">
       {error ? (
         <p className="rounded-md border border-[var(--red-200)] bg-[var(--red-50)] px-3 py-2 text-[13px] text-[var(--red-700)]">
           {error}
@@ -140,7 +141,7 @@ export function RegisterForm() {
         {loading ? "Creating account..." : "Create account"}
       </button>
 
-      <p className="mt-2 text-center text-[12px] text-[var(--black-400)]">
+      <p className="text-center text-[12px] text-[var(--black-400)]">
         By clicking &quot;Create account&quot;, you agree to our{" "}
         <Link href="#" className="underline hover:text-[var(--black-900)]">
           Terms
@@ -151,6 +152,7 @@ export function RegisterForm() {
         </Link>
         .
       </p>
+      </div>
     </form>
   );
 }

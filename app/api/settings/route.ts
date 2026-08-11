@@ -10,7 +10,7 @@ async function requireUser() {
   const session = await getSession();
   if (!session) return null;
 
-  const user = getUserById(session.userId);
+  const user = await getUserById(session.userId);
   if (!user) return null;
 
   return user;
@@ -22,7 +22,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
-  const settings = getSettings(user.id, user.companyName);
+  const settings = await getSettings(user.id, user.companyName);
   return NextResponse.json({ settings });
 }
 
@@ -36,7 +36,7 @@ export async function PUT(request: Request) {
     const body = await request.json();
 
     if (body.reset === true) {
-      const settings = resetSettings(user.id, user.companyName);
+      const settings = await resetSettings(user.id, user.companyName);
       return NextResponse.json({ settings });
     }
 
@@ -63,7 +63,7 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Invalid financial year end." }, { status: 400 });
     }
 
-    const settings = updateSettings(user.id, {
+    const settings = await updateSettings(user.id, {
       legalBusinessName,
       registrationNumber,
       taxId,
